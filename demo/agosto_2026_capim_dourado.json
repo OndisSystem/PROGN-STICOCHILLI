@@ -1,0 +1,344 @@
+{
+  "version": 19,
+  "store": "Capim Dourado",
+  "storeType": "vermelha",
+  "activeTab": "overview",
+  "current": {
+    "period": "2026-08",
+    "target": 246000,
+    "revenue": 209812.81,
+    "watch": 29801.82,
+    "solar": 152544.99,
+    "degree": 7201.01,
+    "lens": 14057.08,
+    "degreeLens": 21258.09,
+    "accessories": 5920.11,
+    "attend": 0,
+    "sales": 512,
+    "pieces": 814,
+    "luxottica": 0,
+    "contactLens": 0,
+    "categoryPieces": {
+      "solar": 444,
+      "watch": 59,
+      "degree": 18,
+      "lens": 18,
+      "accessories": 254,
+      "luxottica": 0,
+      "contactLens": 0
+    }
+  },
+  "previous": {
+    "period": "2025-08",
+    "target": 225000,
+    "revenue": 230538.63,
+    "watch": 30316.8,
+    "solar": 171207.24,
+    "degree": 10679.56,
+    "lens": 13295.76,
+    "degreeLens": 23975.32,
+    "accessories": 4837.28,
+    "attend": 0,
+    "sales": 509,
+    "pieces": 855,
+    "luxottica": 0,
+    "contactLens": 0,
+    "categoryPieces": {
+      "solar": 453,
+      "watch": 60,
+      "degree": 22,
+      "lens": 20,
+      "accessories": 277,
+      "luxottica": 0,
+      "contactLens": 0
+    }
+  },
+  "sellers": [
+    {
+      "name": "Cristian",
+      "role": "Vendedor",
+      "photo": "assets/avatar-cristian.jpg",
+      "profile": "tubarao",
+      "chilliSeguro": 0,
+      "previous": {
+        "period": "2025-08",
+        "target": 61500,
+        "revenue": 58500,
+        "watch": 0,
+        "solar": 0,
+        "degreeLens": 0
+      },
+      "current": {
+        "period": "2026-08",
+        "target": 61500,
+        "revenue": 63677.2,
+        "watch": 6647.9,
+        "solar": 45172.61,
+        "degreeLens": 9309.61
+      },
+      "attend": 0,
+      "sales": 141,
+      "pieces": 262,
+      "crm": 0
+    },
+    {
+      "name": "Noeme",
+      "role": "Vendedora",
+      "photo": "assets/avatar-noeme.jpg",
+      "profile": "aguia",
+      "chilliSeguro": 0,
+      "previous": {
+        "period": "2025-08",
+        "target": 61500,
+        "revenue": 0,
+        "watch": 0,
+        "solar": 0,
+        "degreeLens": 0
+      },
+      "current": {
+        "period": "2026-08",
+        "target": 61500,
+        "revenue": 61672.81,
+        "watch": 10398.04,
+        "solar": 46581.47,
+        "degreeLens": 3213.15
+      },
+      "attend": 0,
+      "sales": 159,
+      "pieces": 224,
+      "crm": 0
+    },
+    {
+      "name": "Iolanda",
+      "role": "Vendedora",
+      "photo": "assets/avatar-iolanda.jpg",
+      "profile": "gato",
+      "chilliSeguro": 0,
+      "previous": {
+        "period": "2025-08",
+        "target": 61500,
+        "revenue": 0,
+        "watch": 0,
+        "solar": 0,
+        "degreeLens": 0
+      },
+      "current": {
+        "period": "2026-08",
+        "target": 61500,
+        "revenue": 48822.1,
+        "watch": 7796.89,
+        "solar": 33491.96,
+        "degreeLens": 6327.34
+      },
+      "attend": 0,
+      "sales": 117,
+      "pieces": 184,
+      "crm": 0
+    },
+    {
+      "name": "Andressa",
+      "role": "Vendedor",
+      "photo": "assets/avatar-andressa.jpg",
+      "profile": "lobo",
+      "chilliSeguro": 0,
+      "previous": {
+        "period": "2025-08",
+        "target": 61500,
+        "revenue": 0,
+        "watch": 0,
+        "solar": 0,
+        "degreeLens": 0
+      },
+      "current": {
+        "period": "2026-08",
+        "target": 61500,
+        "revenue": 34391.31,
+        "watch": 4580.92,
+        "solar": 26467.55,
+        "degreeLens": 2414.27
+      },
+      "attend": 0,
+      "sales": 92,
+      "pieces": 139,
+      "crm": 0
+    }
+  ],
+  "visibleColumns": [
+    "name",
+    "revenue",
+    "achievement",
+    "growth",
+    "conversion",
+    "repRe",
+    "repSolar",
+    "pa",
+    "ticket",
+    "gxl",
+    "repLens",
+    "attend",
+    "sales",
+    "crm",
+    "p7030"
+  ],
+  "shareLens": {
+    "markupRows": [],
+    "labColors": {},
+    "types": {
+      "multifocal": {
+        "label": "Multifocal",
+        "revenue": 3184,
+        "qty": 1
+      },
+      "single": {
+        "label": "Visão simples",
+        "revenue": 4916.99,
+        "qty": 14
+      }
+    },
+    "labs": {
+      "ZEISS": 3,
+      "COMPROL": 8,
+      "NOTLAB": 4,
+      "PREMIUM": 0,
+      "HOYA": 0
+    }
+  },
+  "nextPlan": [],
+  "planColors": {},
+  "operation": {
+    "opportunity": "Alta",
+    "execution": 78,
+    "crm360": {
+      "salesBase": 199491.43,
+      "returnRate": 1.8,
+      "generated": {
+        "amount": 59846.45,
+        "tickets": 467
+      },
+      "redeemed": {
+        "amount": 512.33,
+        "tickets": 9
+      },
+      "lost": {
+        "amount": 47247.81,
+        "tickets": 333
+      },
+      "expiring": {
+        "amount": 0,
+        "tickets": 0
+      }
+    },
+    "oto": {
+      "revenue": 739.84,
+      "sales": 3,
+      "contacts": 125,
+      "conversion": 2.4,
+      "windowDays": 4.67
+    },
+    "challenges": [
+      "Conversão ainda abaixo da meta nos finais de semana.",
+      "Ticket médio impactado por mix de produtos de menor valor.",
+      "Estoque de armações de grau abaixo do ideal.",
+      "Baixo engajamento da equipe em abordagem ativa."
+    ],
+    "wins": [
+      "Boa evolução na apresentação ativa de categorias.",
+      "Melhora na performance de lentes premium.",
+      "Equipe mais engajada e colaborativa.",
+      "Excelente avaliação dos clientes no pós-venda."
+    ],
+    "notes": "Equipe com ótimo potencial.\nFocar na consistência da abordagem e sugestão de lentes premium.\nAjustar mix de exposição nas vitrines principais.",
+    "actions": [
+      {
+        "action": "Aumentar abordagem ativa nos finais de semana",
+        "responsible": "Iolanda",
+        "due": "2026-09-15",
+        "status": "Em andamento"
+      },
+      {
+        "action": "Impulsionar venda de lentes premium",
+        "responsible": "Noeme",
+        "due": "2026-09-20",
+        "status": "Em andamento"
+      },
+      {
+        "action": "Repor estoque de armações de grau",
+        "responsible": "Cristian",
+        "due": "2026-09-05",
+        "status": "Pendente"
+      },
+      {
+        "action": "Treinamento rápido: abordagem e objeções",
+        "responsible": "Andressa",
+        "due": "2026-09-10",
+        "status": "Planejado"
+      }
+    ]
+  },
+  "teamRx": {
+    "engagement": 86,
+    "execution": 78,
+    "strengths": [
+      "Alta consistência na abordagem e relacionamento com o cliente.",
+      "Excelentes resultados em categorias Solar e Relógios.",
+      "Time engajado com as metas e aberto a feedbacks.",
+      "Boa evolução no ticket médio."
+    ],
+    "attention": [
+      "Conversão abaixo da meta em parte do time.",
+      "Necessidade de melhorar uso de complementares (Lentes).",
+      "Manter disciplina no registro de atividades no CRM."
+    ],
+    "trainings": [
+      {
+        "text": "Treinamento: Técnicas avançadas de abordagem",
+        "date": "2026-09-08",
+        "done": true
+      },
+      {
+        "text": "Workshop: Lentes e complementares",
+        "date": "2026-09-15",
+        "done": true
+      },
+      {
+        "text": "Mentoria individual com foco em conversão",
+        "date": "",
+        "done": false
+      },
+      {
+        "text": "Role play: Objeções e fechamento",
+        "date": "",
+        "done": false
+      }
+    ],
+    "notes": "Time evoluindo bem no engajamento e na conversão. Foco do próximo mês será geração de oportunidades e melhoria na disciplina do processo.",
+    "individual": {
+      "Cristian": {
+        "challenge": "Melhorar execução",
+        "next": "Reforçar processo e rotina diária",
+        "status": "Atenção"
+      },
+      "Noeme": {
+        "challenge": "Elevar ticket médio",
+        "next": "Explorar mais cross e upgrade",
+        "status": "No caminho"
+      },
+      "Iolanda": {
+        "challenge": "Aumentar conversão",
+        "next": "Foco em qualificação e follow-up",
+        "status": "No caminho"
+      },
+      "Andressa": {
+        "challenge": "Gerar mais leads",
+        "next": "Aumentar prospecção e indicações",
+        "status": "Atenção"
+      }
+    }
+  },
+  "exampleData": true,
+  "exampleInfo": {
+    "source": "Exemplo de agosto recuperado da base padrão da versão V18.8",
+    "period": "2026-08",
+    "note": "Dados de demonstração para testes. Não representam lançamento confirmado em produção."
+  }
+}

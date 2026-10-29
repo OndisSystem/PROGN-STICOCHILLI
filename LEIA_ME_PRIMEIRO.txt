@@ -1,0 +1,139 @@
+PROGNÓSTICO MENSAL — V19.3 ONLINE + 6 TEMAS + EXEMPLO DE AGOSTO
+==================================================================
+
+ESTE ZIP É O PROJETO ONLINE PARA IMPLANTAÇÃO. NÃO HÁ SITE PUBLICADO AUTOMATICAMENTE.
+É preciso executar um servidor Node.js 22.16+ e publicar em hospedagem com HTTPS e disco persistente.
+Não abra public/index.html diretamente; o login online exige servidor.
+
+O QUE ESTÁ INCLUÍDO
+-------------------
+* Loja Vermelha e Ótica Chilli Beans, cada uma com indicadores adequados ao tipo.
+* Seis novos temas para ambas: Pink Lemon, Dark Chilli, Neon Tokyo, Vintage Sun,
+  Sun Rise e Blue Ocean. Temas originais preservados; Chilli Neon na Vermelha.
+* Usuários: Master, Gerente (uma loja), Supervisor e Franqueado (todas as lojas).
+* Login no servidor, senhas com hash scrypt, cookie de sessão HttpOnly,
+  proteção CSRF e autorização por loja em todas as APIs de prognóstico.
+* SQLite local ao SERVIDOR (não ao navegador), por loja e por mês.
+* Exemplo AGOSTO/2026 da loja Capim Dourado da base da V18.8.
+
+ORIGEM DO EXEMPLO
+-----------------
+O conjunto de Agosto NÃO foi recuperado de um navegador nem de uma nuvem antiga:
+foi reconstruído a partir dos dados de demonstração que já vinham preenchidos
+no código do ZIP antigo da versão V18.8. Não temos como recuperar modificações
+privadas que ficaram apenas no armazenamento do navegador de outro computador.
+
+Exemplo original: Capim Dourado, 08/2026, faturamento R$ 209.812,81,
+meta R$ 246.000,00, ano anterior R$ 230.538,63;
+quatro vendedores: Cristian, Noeme, Iolanda e Andressa.
+
+Na primeira inicialização de um banco NOVO E VAZIO, quando
+SEED_AUGUST_EXAMPLE=1, o sistema cria a loja Capim Dourado com seu prognóstico
+em Agosto/2026 e um arquivo no Banco de Dados. O mês é identificado como
+EXEMPLO e os valores não devem ser considerados dados reais certificados.
+A importação inicial NÃO modifica bancos existentes nem outras lojas.
+
+NOVAS LOJAS criadas depois começam com tudo zerado, sem dados fictícios.
+
+1. TESTAR A VERSÃO ONLINE NO WINDOWS
+-------------------------------------
+1) Instale Node.js 22.16 ou superior: https://nodejs.org/
+2) Extraia o ZIP para uma pasta normal. Não rode diretamente dentro do ZIP.
+3) Dê dois cliques em INICIAR_LOCAL_WINDOWS.bat.
+4) Na primeira execução, informe a senha Master inicial (a sua escolha).
+5) Abra http://localhost:3000 no Chrome ou Edge.
+6) Usuário: SuperChilli2026. Senha: a configurada no primeiro início.
+7) A loja Capim Dourado abrirá em 08/2026, desde que o banco seja novo.
+
+A senha não está no ZIP nem no código do navegador; configure-a no servidor.
+Se o banco já existe, alterar a variável MASTER_PASSWORD NÃO troca a senha da conta;
+para trocar a senha use "Alterar senha" dentro do sistema.
+
+2. INSTALAR MANUALMENTE (WINDOWS, LINUX OU MAC)
+------------------------------------------------
+* Copie .env.example para .env.
+* Edite o .env e defina MASTER_PASSWORD com uma senha forte.
+* Mantenha SEED_AUGUST_EXAMPLE=1 caso queira o exemplo em um banco novo.
+* Execute: npm start
+* Abra http://localhost:3000.
+* Opcional para testes técnicos: npm test.
+
+OBSERVAÇÃO: MASTER_PASSWORD e .env são privados e NÃO devem ser colocados
+no repositório, em HTML, em JavaScript do navegador ou enviados a terceiros.
+
+3. ACESSO DE USUÁRIOS
+---------------------
+* Master: cria e altera lojas e usuários, acessa todas as unidades.
+* Gerente: o Master escolhe a loja no cadastro; acessa somente essa unidade.
+* Supervisor: acessa todas as unidades.
+* Franqueado: acessa todas as unidades.
+* Usuários comuns entram por e-mail + senha cadastrados pelo Master.
+* Alterações de nome/tipo da loja: apenas Master.
+* Alterações de faturamento: permitidas para perfis com acesso à loja.
+
+4. RECUPERAR AGOSTO EM UMA INSTALAÇÃO QUE JÁ EXISTE
+----------------------------------------------------
+Antes de importar, FAÇA BACKUP DO BANCO DO SERVIDOR.
+Se o servidor já tem outras lojas, a primeira inicialização não adiciona
+a loja de exemplo automaticamente. Para adicionar o exemplo sem sobrescrever
+um Agosto já preenchido, execute com o servidor parado:
+
+  npm run import:august
+
+O comando cria Capim Dourado se ainda não existir, ou importa 08/2026 se
+não houver registro nesse mês. Não altera outros meses ou lojas.
+Se Agosto já estiver preenchido, ele NÃO o sobrescreve.
+Há também o arquivo demo/BACKUP_EXEMPLO_AGOSTO_2026.json para importar
+pelo sistema (Configurações > Importar backup) na loja correta.
+ATENÇÃO: importar JSON por interface confirma a substituição do mês atual.
+
+5. IMPORTAR UM BACKUP PRÓPRIO DA V18/V19 OFFLINE
+------------------------------------------------
+* No sistema offline antigo, vá a Configurações > Exportar backup (JSON).
+* Entre no sistema online como usuário autorizado à loja desejada.
+* Selecione a loja correta na barra superior.
+* Vá a Configurações > Importar backup e escolha o arquivo JSON exportado.
+* Confirme a importação somente após exportar backup do ambiente online.
+* A importação destina os dados à loja selecionada; não cria contas automaticamente.
+* O arquivo do exemplo NÃO equivale a alterações privadas realizadas depois
+  de abrir a V18 no computador do usuário.
+
+6. PUBLICAR NA INTERNET
+------------------------
+Hospedagem: Node.js 22.16+ ou Docker, endereço HTTPS e volume persistente.
+Use a porta definida em PORT (padrão 3000); health check GET /api/health.
+Defina no servidor MASTER_USERNAME, MASTER_PASSWORD, DB_PATH,
+NODE_ENV=production e SECURE_COOKIES=1.
+
+Com docker-compose.yml, o acesso de host fica em 127.0.0.1:3000.
+Coloque um proxy HTTPS (Caddy/Nginx/Traefik) apontando para essa porta.
+Nunca exponha .env, /data, /demo, .sqlite ou arquivos de backup ao público.
+
+Usando SQLite, execute UMA instância do serviço e mantenha o banco e seu WAL
+num volume persistente. Faça backups consistentes com SQLite VACUUM INTO ou
+a API de backup do banco; NÃO copie apenas o .sqlite durante gravações WAL.
+Para vários servidores simultâneos ou alta concorrência, planeje PostgreSQL.
+
+7. SEGURANÇA / HOMOLOGAÇÃO
+--------------------------
+* Login e permissões são aplicados no servidor (não só na interface).
+* Senhas com scrypt e salt aleatório; sessão HttpOnly com SameSite=Strict.
+* CSRF validado em escritas; login com limite de tentativas repetidas.
+* HTTPS deve ser habilitado no proxy externo; cookies Secure em produção.
+* Teste todos os perfis e o fluxo real de criação de contas no site publicado.
+* Proteja o servidor, aplique backups automáticos e monitore a aplicação.
+* Esta versão passou testes automatizados locais; não significa que está
+  publicada ou que substitui uma auditoria independente de produção.
+
+8. FERRAMENTAS E ARQUIVOS
+-------------------------
+  server.js                            Servidor e APIs protegidas.
+  public/                             Painel web, estilos, seis temas e imagens.
+  demo/agosto_2026_capim_dourado.json Fonte recuperada de V18.8.
+  demo/BACKUP_EXEMPLO_AGOSTO_2026.json Backup de demonstração portável.
+  demo/IMPORTAR_AGOSTO_EXISTENTE.js   Importa sem sobrescrever por padrão.
+  .env.example                        Exemplo de variáveis do servidor.
+  Dockerfile / docker-compose.yml     Preparação de deploy Docker.
+  tests/                              Testes automatizados de API e exemplo.
+
+IMPORTANTE: dados de agosto recuperados são EXEMPLO, não comprovação contábil.

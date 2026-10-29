@@ -1,0 +1,536 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Prognóstico Mensal V19.3 — Online · Oito Temas</title>
+  <link rel="icon" type="image/png" sizes="128x128" href="assets/rede-toma-favicon.png?v=7" />
+  <link rel="shortcut icon" href="assets/favicon.ico?v=7" />
+  <link rel="apple-touch-icon" href="assets/rede-toma-favicon.png?v=7" />
+  <meta name="theme-color" content="#07111f" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <meta name="application-name" content="Prognóstico Mensal V19.3 Online" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Prognóstico Rede Toma" />
+  <link rel="stylesheet" href="styles.css?v=online-19-3" />
+  <link rel="stylesheet" href="chilli-neon.css?v=19.2" />
+  <link rel="stylesheet" href="themes.css?v=19.2" />
+</head>
+<body class="saas-auth-pending">
+  <div id="saasAuthRoot"></div>
+  <div id="saasToolbar" hidden></div>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand-wrap">
+        <div class="brand-badge"><img id="brandLogo" src="assets/logo-vermelha.png" alt="Chilli Beans — Loja Vermelha"></div>
+        <div class="store-name" id="brandStore">CAPIM DOURADO</div>
+      </div>
+      <div class="sidebar-divider"></div>
+
+      <button type="button" class="side-control side-control-button" id="openStoreSettingsBtn" aria-label="Configurar nome da loja">
+        <span class="side-icon">⌂</span>
+        <span class="side-copy"><small>Loja</small><strong id="sideStore">Capim Dourado</strong></span>
+        <span class="side-chevron">⌄</span>
+      </button>
+
+      <label class="side-control">
+        <span class="side-icon">▣</span>
+        <span class="side-copy"><small>Período</small><strong id="sidePeriod">Agosto 2026</strong></span>
+        <input id="monthInput" type="month" value="2026-08" />
+      </label>
+
+      <div class="side-kpi-card">
+        <div class="side-kpi-label">CONVERSÃO GxL</div>
+        <div class="side-kpi-value" id="sideConversionGxl">0%</div>
+        <svg viewBox="0 0 180 48" preserveAspectRatio="none" aria-hidden="true"><path d="M0,36 C20,34 20,16 48,22 C72,28 88,10 110,16 C132,20 145,7 180,13" fill="none" stroke="currentColor" stroke-width="3"/></svg>
+      </div>
+
+      <div class="side-kpi-card">
+        <div class="side-kpi-label">REP DE LE</div>
+        <div class="side-kpi-value" id="sideRepLens">0%</div>
+        <svg viewBox="0 0 180 48" preserveAspectRatio="none" aria-hidden="true"><path d="M0,36 C25,30 30,18 55,22 C78,25 93,8 117,18 C138,25 149,6 180,14" fill="none" stroke="currentColor" stroke-width="3"/></svg>
+      </div>
+
+      <div class="side-kpi-card optical-only" id="sideLuxotticaCard">
+        <div class="side-kpi-label">REP LUXOTTICA</div>
+        <div class="side-kpi-value" id="sideRepLuxottica">0%</div>
+        <svg viewBox="0 0 180 48" preserveAspectRatio="none" aria-hidden="true"><path d="M0,38 C29,24 31,18 58,24 S111,9 137,14 S163,11 180,9" fill="none" stroke="currentColor" stroke-width="3"/></svg>
+      </div>
+      <div class="side-kpi-card optical-only" id="sidePmlCard">
+        <div class="side-kpi-label">P.M.L</div>
+        <div class="side-kpi-value" id="sidePml">R$ 0</div>
+        <svg viewBox="0 0 180 48" preserveAspectRatio="none" aria-hidden="true"><path d="M0,35 C40,35 42,23 70,25 S119,14 141,18 S165,13 180,11" fill="none" stroke="currentColor" stroke-width="3"/></svg>
+      </div>
+      <div class="side-spacer"></div>
+      <button class="side-footer-btn" id="resetDemoBtn" title="Restaura a base padrão desta versão">↻ <span>Restaurar base</span></button>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="neon-topbar-art" aria-hidden="true"></div>
+        <div class="title-block">
+          <div class="neon-eyebrow">CHILLI BEANS <span>·</span> INTELIGÊNCIA DE VAREJO</div>
+          <h1>Prognóstico Mensal — <span id="headerPeriod">Agosto 2026</span></h1>
+          <p><span id="headerStoreType">Chilli Beans — Loja Vermelha</span> · <span id="headerStore">Capim Dourado</span></p>
+        </div>
+
+        <nav class="topnav grouped-nav" aria-label="Navegação principal">
+    <button type="button" class="nav-btn nav-home active" data-tab="overview"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg> <span>Visão Geral</span></button>
+    <div class="nav-menu" data-nav-menu="team">
+        <button type="button" class="nav-group-trigger" aria-expanded="false" aria-controls="submenu-team" aria-haspopup="true"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 20v-1.5a6 6 0 0 1 12 0V20M17.5 6a3 3 0 0 1 0 6M19 15a4.5 4.5 0 0 1 2 4v1"/></svg> <span>Equipe</span> <span class="nav-chevron"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></button>
+        <div class="nav-submenu" id="submenu-team" role="menu" aria-label="Equipe">
+          <button type="button" class="nav-btn nav-subitem" data-tab="team" role="menuitem">Equipe</button><button type="button" class="nav-btn nav-subitem" data-tab="ranking" role="menuitem">Ranking</button><button type="button" class="nav-btn nav-subitem" data-tab="teamrx" role="menuitem">Raio X do Time</button>
+        </div>
+      </div>
+    <div class="nav-menu" data-nav-menu="products">
+        <button type="button" class="nav-group-trigger" aria-expanded="false" aria-controls="submenu-products" aria-haspopup="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12.5 5 9l3 2h8l3-2 2.5 3.5"/><path d="M9 11.5 10 6h4l1 5.5"/><circle cx="6.5" cy="15.5" r="3.2"/><circle cx="17.5" cy="15.5" r="3.2"/></svg> <span>Produtos</span> <span class="nav-chevron"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></button>
+        <div class="nav-submenu" id="submenu-products" role="menu" aria-label="Produtos">
+          <button type="button" class="nav-btn nav-subitem" data-tab="categories" role="menuitem">Categorias</button><button type="button" class="nav-btn nav-subitem" data-tab="share" role="menuitem">Share de Lentes</button>
+        </div>
+      </div>
+    <div class="nav-menu" data-nav-menu="results">
+        <button type="button" class="nav-group-trigger" aria-expanded="false" aria-controls="submenu-results" aria-haspopup="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20v-5M10 20V9M16 20V4M22 20v-8"/></svg> <span>Resultados</span> <span class="nav-chevron"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></button>
+        <div class="nav-submenu" id="submenu-results" role="menu" aria-label="Resultados">
+          <button type="button" class="nav-btn nav-subitem" data-tab="closing" role="menuitem">Fechamento</button>
+        </div>
+      </div>
+    <div class="nav-menu" data-nav-menu="analysis">
+        <button type="button" class="nav-group-trigger" aria-expanded="false" aria-controls="submenu-analysis" aria-haspopup="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 10 10H12z"/><path d="M14 2.2V10h7.8A10 10 0 0 0 14 2.2z"/></svg> <span>Análises</span> <span class="nav-chevron"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></button>
+        <div class="nav-submenu" id="submenu-analysis" role="menu" aria-label="Análises">
+          <button type="button" class="nav-btn nav-subitem" data-tab="operation" role="menuitem">Raio X Operação</button>
+        </div>
+      </div>
+    <button type="button" class="nav-btn nav-database" data-tab="database"><svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg> <span>Banco de Dados</span></button>
+  </nav>
+
+        <div class="header-actions">
+          <button class="icon-btn" title="Editar dados gerais" id="headerEditBtn">✎</button>
+          <button class="icon-btn" title="Ajuda" id="helpBtn">?</button>
+          <button class="cloud-account-btn" type="button" id="cloudAccountBtn" title="Conta online">● <span>Conta</span></button>
+          <button type="button" class="header-save-btn main-save-btn icon-only-save-btn" title="Salvar prognóstico no Banco de Dados" aria-label="Salvar prognóstico" id="saveForecastBtn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 3h14l3 3v15H3V3z"/><path d="M7 3v7h10V3M7 21v-8h10v8"/></svg></button>
+          <button class="icon-btn settings-btn" title="Configurações" aria-label="Configurações" id="settingsBtn">⚙</button>
+        </div>
+      </header>
+
+      <!-- VISÃO GERAL -->
+      <section class="view active" id="view-overview">
+        <section class="comparison-card">
+          <div class="period-strip current-strip"><strong id="stripCurrentMonth">AGOSTO<br>2026</strong><span>Fechado</span><b>✓</b></div>
+          <div class="metrics-grid" id="metricsCurrent"></div>
+          <div class="period-strip previous-strip"><strong id="stripPreviousMonth">AGOSTO<br>2025</strong><span>Comparativo</span></div>
+          <div class="metrics-grid previous" id="metricsPrevious"></div>
+          <div class="comparison-note">Dados comparativos referentes ao mesmo período do ano anterior.</div>
+        </section>
+
+        <section class="section-head">
+          <div class="section-title"><span>♧</span><h2>Equipe</h2><span class="pill" id="sellerCountPill">0 de 10 vendedores</span></div>
+          <div class="section-actions">
+            <button class="secondary-btn" id="configureColumns">⚙ Configurar Colunas</button>
+            <button class="secondary-btn emphasis-btn" id="editSellerDataBtn">✎ Editar Dados Vendedores</button>
+            <button class="secondary-btn" id="exportBtn">⇩ Exportar</button>
+            <button class="primary-btn" id="addSellerBtn">＋ Vendedor</button>
+          </div>
+        </section>
+
+        <section class="table-card">
+          <div class="table-scroll">
+            <table id="sellerTable">
+              <thead><tr id="sellerTableHead"></tr></thead>
+              <tbody id="sellerTableBody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="category-card overview-closing-card">
+          <div class="category-head">
+            <div class="section-title"><span>▥</span><h2>Fechamento Mensal por Categoria</h2></div>
+            <div class="category-head-actions">
+              <div class="legend"><span><i class="legend-yellow"></i><span id="legendPrev">Agosto 2025</span></span><span><i class="legend-blue"></i><span id="legendCurrent">Agosto 2026</span></span><span>▧ % Variação</span></div>
+              <button class="secondary-btn category-edit-btn" data-open-categories>✎ Editar Categorias</button>
+            </div>
+          </div>
+          <div class="category-grid" id="overviewCategoryGrid"></div>
+        </section>
+      </section>
+
+      <!-- EQUIPE -->
+      <section class="view" id="view-team">
+        <div class="page-head">
+          <div><span class="eyebrow">EQUIPE</span><h2>Desempenho dos vendedores</h2><p>Até 10 vendedores por fechamento mensal.</p></div>
+          <div class="page-actions"><button class="primary-btn" id="teamAddSellerBtn">＋ Cadastrar vendedor</button><button class="secondary-btn" id="teamEditSellerBtn">✎ Editar vendedores</button></div>
+        </div>
+        <div class="seller-card-grid" id="sellerCardGrid"></div>
+        <div class="analytics-grid two-col">
+          <article class="chart-card"><div class="chart-title"><div><span class="chart-icon">⌁</span><strong>Evolução do faturamento</strong><small>Comparativo do realizado por vendedor.</small></div><div class="chart-legend"><span><i class="dot blue"></i>Ano atual</span><span><i class="dot gray"></i>Ano anterior</span></div></div><div id="teamRevenueChart" class="svg-chart"></div></article>
+          <article class="chart-card"><div class="chart-title"><div><span class="chart-icon">▥</span><strong>Linhas de categorias vendidas</strong><small>Valor vendido por vendedor nas categorias-chave.</small></div><div class="chart-legend" id="teamCategoriesLegend"><span><i class="dot blue"></i>Solar</span><span><i class="dot purple"></i>Relógio</span><span><i class="dot green"></i>Grau + Lente</span></div></div><div id="teamCategoriesChart" class="svg-chart"></div></article>
+        </div>
+      </section>
+
+      <!-- CATEGORIAS -->
+      <section class="view" id="view-categories">
+        <div class="page-head">
+          <div><span class="eyebrow">CATEGORIAS</span><h2>Mix e representatividade</h2><p>Quanto cada categoria representa no faturamento total da loja.</p></div>
+          <div class="page-actions"><button class="primary-btn" data-open-categories>✎ Editar categorias</button></div>
+        </div>
+        <div class="mix-card-grid" id="mixCategoryCards"></div>
+        <article class="composition-card">
+          <span class="eyebrow">COMPOSIÇÃO DO FATURAMENTO</span>
+          <h3>Distribuição por categoria</h3>
+          <div class="composition-bar" id="compositionBar"></div>
+          <div class="composition-legend" id="compositionLegend"></div>
+        </article>
+      </section>
+
+      <!-- SHARE DE LENTE -->
+      <section class="view" id="view-share">
+        <div class="page-head">
+          <div><span class="eyebrow">SHARE DE LENTE</span><h2>Mix de lentes e laboratórios</h2><p>Distribuição por tipo de lente, faturamento, quantidade e participação por laboratório.</p></div>
+          <div class="page-actions"><button class="primary-btn" id="editShareLensBtn">✎ Editar Share de Lente</button></div>
+        </div>
+
+        <div class="share-layout">
+          <article class="share-card">
+            <div class="share-card-head">
+              <div><span class="eyebrow share-eyebrow">SHARE DE LENTE</span><h3>Tipo de lente</h3><p>Percentual calculado sobre a quantidade total de lentes do fechamento.</p></div>
+              <div class="share-total-pill"><small>Lentes no fechamento</small><strong id="shareLensTotalPieces">0</strong></div>
+            </div>
+            <div class="table-scroll">
+              <table class="share-table">
+                <thead><tr><th>TIPO</th><th>%</th><th>FATURAMENTO</th><th>QTD</th><th>PREÇO MÉDIO</th></tr></thead>
+                <tbody id="shareLensTypeBody"></tbody>
+              </table>
+            </div>
+            <div class="share-summary" id="shareLensSummary"></div>
+          </article>
+
+          <article class="share-card">
+            <div class="share-card-head">
+              <div><span class="eyebrow share-eyebrow">SHARE POR LABORATÓRIO</span><h3>Distribuição por laboratório</h3><p>Participação calculada automaticamente pela quantidade informada.</p></div>
+              <div class="share-total-pill warm"><small>Total identificado</small><strong id="shareLabTotal">0</strong></div>
+            </div>
+            <div class="table-scroll">
+              <table class="share-table lab-table">
+                <thead><tr><th>LABORATÓRIO</th><th>QTD</th><th>%</th></tr></thead>
+                <tbody id="shareLabBody"></tbody>
+              </table>
+            </div>
+            <div class="lab-share-bar" id="labShareBar"></div>
+            <div class="lab-share-legend" id="labShareLegend"></div>
+          </article>
+        </div>
+        <section class="v18-section" id="markupSection"><div class="v18-heading"><div><h3>Markup de laboratórios</h3><p>Controle de vendas, custos e montagem</p></div><button class="primary-btn" id="addMarkupBtn">＋ Lançar venda</button></div><div class="v18-scroll"><table class="data-table"><thead><tr><th>DATA</th><th>LABORATÓRIO</th><th>TECNOLOGIA</th><th>PARES</th><th>VENDA</th><th>CUSTO</th><th>MONTAGEM</th><th>MARKUP</th><th></th></tr></thead><tbody id="markupBody"></tbody></table></div><div class="calculation-banner" id="markupTotals"></div></section>
+        <section class="v18-section lens-chart-section" aria-label="Comparativo de laboratórios">
+          <div class="v18-heading"><div><h3>Comparativo por laboratório</h3><p>Quantidade de pares de lentes e markup consolidado das vendas registradas.</p></div></div>
+          <div id="labMarkupChart"></div>
+        </section>
+      </section>
+
+      <!-- FECHAMENTO -->
+      <section class="view" id="view-closing">
+        <div class="page-head">
+          <div><span class="eyebrow">FECHAMENTO POR CATEGORIA</span><h2>Ano anterior × ano atual</h2><p>Comparativo de peças e faturamento do mesmo mês.</p></div>
+          <div class="page-actions"><button class="secondary-btn" id="closingExportBtn">⇩ Exportar CSV</button><button class="primary-btn" data-open-categories>✎ Editar dados</button></div>
+        </div>
+        <article class="closing-table-card"><div class="table-scroll"><table class="closing-table"><thead><tr><th>CATEGORIA</th><th class="prev-col">PEÇAS ANTERIOR</th><th class="prev-col">VALOR ANTERIOR</th><th class="cur-col">PEÇAS ATUAL</th><th class="cur-col">VALOR ATUAL</th><th>VAR. PEÇAS</th><th>VAR. FATURAMENTO</th></tr></thead><tbody id="closingTableBody"></tbody></table></div></article>
+        <div class="analytics-grid two-col closing-charts">
+          <article class="chart-card"><div class="chart-title"><div><span class="chart-icon">▥</span><strong>Comparativo de faturamento</strong><small>Valor de faturamento por categoria.</small></div><div class="chart-legend"><span><i class="dot yellow"></i>Ano anterior</span><span><i class="dot blue"></i>Ano atual</span></div></div><div id="closingRevenueChart" class="svg-chart"></div></article>
+          <article class="chart-card"><div class="chart-title"><div><span class="chart-icon">⌁</span><strong>Comparativo de peças</strong><small>Quantidade de peças por categoria.</small></div><div class="chart-legend"><span><i class="dot yellow"></i>Ano anterior</span><span><i class="dot blue"></i>Ano atual</span></div></div><div id="closingPiecesChart" class="svg-chart"></div></article>
+        </div>
+      </section>
+
+      <!-- RANKING -->
+      <section class="view" id="view-ranking">
+        <div class="page-head ranking-head"><div><span class="eyebrow">RANKING</span><h2>Destaques do mês</h2><p>Reconhecimento automático pelos principais indicadores.</p></div></div>
+        <div class="podium" id="podium"></div>
+        <div class="highlight-grid" id="highlightGrid"></div>
+      </section>
+
+      <!-- RAIO X OPERAÇÃO -->
+      <section class="view" id="view-operation">
+        <div class="page-head">
+          <div><span class="eyebrow">RAIO X OPERAÇÃO</span><h2>Diagnóstico da operação</h2><p>Leitura mensal dos desafios, acertos e plano de ação da loja.</p></div>
+          <div class="page-actions"><button class="secondary-btn" id="editOperationBtn">✎ Editar análise</button><button class="primary-btn" id="saveOperationShortcut">▣ Salvar</button></div>
+        </div>
+        <div class="rx-kpi-grid" id="operationKpis"></div>
+
+        <section class="crm360-panel">
+          <div class="commercial-panel-head">
+            <div><span class="eyebrow">CRM360</span><h3>Raio X CRM360</h3><p>Leitura dos bônus gerados, resgatados, perdidos e a vencer.</p></div>
+            <button class="secondary-btn dark-edit-btn" id="editCrm360Btn">✎ Editar CRM360</button>
+          </div>
+          <div class="crm360-grid" id="crm360Cards"></div>
+        </section>
+
+        <section class="oto-panel">
+          <div class="commercial-panel-head oto-head">
+            <div class="oto-brand-title"><img src="assets/oto-logo.png" alt="Oto"><div><span class="eyebrow">RAIO X OTO</span><h3>Performance Oto</h3><p>Receita atribuída, contatos e conversão do CRM Oto.</p></div></div>
+            <button class="secondary-btn" id="editOtoBtn">✎ Editar Oto</button>
+          </div>
+          <div class="oto-kpi-grid" id="otoKpis"></div>
+        </section>
+
+        <div class="rx-grid">
+          <article class="rx-card"><div class="rx-card-head"><div><h3>Desafios da operação</h3><p>Principais pontos críticos identificados no mês.</p></div><button class="tiny-edit" data-edit-operation>✎</button></div><div class="bullet-box" id="operationChallenges"></div></article>
+          <article class="rx-card"><div class="rx-card-head"><div><h3>Acertos do mês</h3><p>Principais acertos e pontos positivos.</p></div><button class="tiny-edit" data-edit-operation>✎</button></div><div class="bullet-box" id="operationWins"></div></article>
+          <article class="rx-card"><div class="rx-card-head"><div><h3>Observações do gestor</h3><p>Comentários adicionais sobre a operação.</p></div><button class="tiny-edit" data-edit-operation>✎</button></div><div class="notes-box" id="operationNotes"></div></article>
+          <article class="chart-card operation-chart-card"><div class="chart-title"><div><span class="chart-icon">⌁</span><strong>Faturamento × meta</strong><small>Leitura do fechamento atual e comparativo.</small></div></div><div id="operationChart" class="svg-chart"></div></article>
+        </div>
+        <section class="v18-section next-plan-section" aria-label="Plano de ação para o próximo mês">
+          <div class="v18-heading"><div><span class="eyebrow">PLANEJAMENTO</span><h3>Plano de ação — Próximo mês</h3><p>Equipe · Visual · Estoque · Resultado · Corridas</p></div></div>
+          <div id="nextPlanContent"></div>
+        </section>
+      </section>
+
+      <!-- RAIO X DO TIME -->
+      <section class="view" id="view-teamrx">
+        <div class="page-head">
+          <div><span class="eyebrow">RAIO X DO TIME</span><h2>Evolução do time</h2><p>Desafios, acertos e desenvolvimento dos vendedores.</p></div>
+          <div class="page-actions"><button class="secondary-btn" id="editTeamRxBtn">✎ Editar análise</button><button class="primary-btn" id="saveTeamRxShortcut">▣ Salvar</button></div>
+        </div>
+        <div class="teamrx-kpi-grid" id="teamRxKpis"></div>
+        <div class="teamrx-top-grid">
+          <article class="rx-card"><div class="rx-card-head"><h3>Pontos fortes do time</h3><button class="tiny-edit" data-edit-teamrx>✎</button></div><div class="bullet-box success-bullets" id="teamStrengths"></div></article>
+          <article class="rx-card"><div class="rx-card-head"><h3>Pontos de atenção</h3><button class="tiny-edit" data-edit-teamrx>✎</button></div><div class="bullet-box attention-bullets" id="teamAttention"></div></article>
+          <article class="rx-card"><div class="rx-card-head"><h3>Treinamentos e ações de desenvolvimento</h3><button class="tiny-edit" data-edit-teamrx>✎</button></div><div id="trainingList" class="training-list"></div></article>
+        </div>
+        <div class="teamrx-bottom-grid">
+          <article class="rx-card evolution-card"><div class="rx-card-head"><h3>Evolução individual</h3><button class="tiny-edit" data-edit-teamrx>✎</button></div><div class="table-scroll"><table class="evolution-table"><thead><tr><th>Vendedor</th><th>Desafio principal</th><th>Evolução do mês</th><th>Próximo passo</th><th>Status</th></tr></thead><tbody id="individualEvolutionBody"></tbody></table></div></article>
+          <article class="chart-card"><div class="chart-title"><div><span class="chart-icon">▥</span><strong>Evolução dos vendedores</strong><small>Crescimento/queda do faturamento individual.</small></div></div><div id="teamRxChart" class="svg-chart"></div></article>
+          <article class="rx-card"><div class="rx-card-head"><h3>Observações do gestor</h3><button class="tiny-edit" data-edit-teamrx>✎</button></div><div class="notes-box tall" id="teamRxNotes"></div></article>
+        </div>
+      </section>
+
+      <!-- BANCO DE DADOS -->
+      <section class="view" id="view-database">
+        <div class="page-head database-head">
+          <div><span class="eyebrow">BANCO DE DADOS</span><h2>Histórico de prognósticos</h2><p>Cada fechamento salvo fica arquivado por mês. No modo OneDrive, o banco fica dentro da própria pasta sincronizada.</p></div>
+          <div class="page-actions"><button class="primary-btn" id="databaseSaveCurrentBtn">▣ Salvar mês atual</button></div>
+        </div>
+        <div class="database-kpi-grid">
+          <article class="database-kpi"><small>PROGNÓSTICOS SALVOS</small><strong id="dbTotalRecords">0</strong><span>meses arquivados</span></article>
+          <article class="database-kpi"><small>ÚLTIMO ARQUIVO</small><strong id="dbLatestTitle">—</strong><span id="dbLatestDate">Nenhum salvamento</span></article>
+          <article class="database-kpi"><small>PERÍODO ATUAL</small><strong id="dbCurrentPeriod">—</strong><span id="dbCurrentStore">—</span></article>
+          <article class="database-kpi"><small>ARMAZENAMENTO</small><strong id="dbStorageMode">Verificando…</strong><span id="dbStorageDetail">Banco do aplicativo</span></article>
+        </div>
+        <article class="database-card">
+          <div class="database-toolbar">
+            <div><h3>Arquivos salvos</h3><p>O nome do arquivo pode ser alterado sem modificar os dados do prognóstico.</p></div>
+            <label class="database-search">⌕ <input id="databaseSearch" type="search" placeholder="Buscar por nome, loja ou período"></label>
+          </div>
+          <div class="database-table-wrap">
+            <table class="database-table">
+              <thead><tr><th>NOME DO ARQUIVO</th><th>PERÍODO</th><th>LOJA</th><th>META</th><th>REALIZADO</th><th>ATINGIMENTO</th><th>ÚLTIMA ALTERAÇÃO</th><th>AÇÕES</th></tr></thead>
+              <tbody id="databaseTableBody"></tbody>
+            </table>
+          </div>
+          <div class="database-empty" id="databaseEmpty"><div>▤</div><h3>Nenhum prognóstico salvo</h3><p>Clique em <strong>Salvar</strong> no topo do sistema. O mês será arquivado automaticamente aqui.</p></div>
+        </article>
+        <div class="database-note" id="databaseStorageNote"><strong>Como funciona:</strong> no Mac, abra pelo <code>INICIAR_PROGNOSTICO_MAC.command</code>. Quando a pasta do sistema estiver dentro do OneDrive, cada mês salvo fica em <code>dados/prognosticos</code> e é sincronizado pelo OneDrive. Excel e PDFs continuam sendo gerados a partir da versão arquivada.</div>
+      </section>
+    </main>
+  </div>
+
+  <!-- DADOS GERAIS -->
+  <dialog id="dataModal" class="modal wide-modal">
+    <form method="dialog" id="dataForm" novalidate>
+      <div class="modal-head"><div><h3>Editar dados do fechamento</h3><p>Preencha os dois períodos. Representatividade, atingimento de meta e crescimento/queda são calculados automaticamente.</p></div><button value="cancel" class="close-btn">×</button></div>
+      <div class="period-edit-grid">
+        <section class="period-edit-card previous-edit"><div class="period-edit-title"><span class="year-dot yellow-dot"></span><div><strong>Vendidos ano anterior</strong><small>Base comparativa</small></div></div><div class="form-grid compact-grid">
+          <label>Período (MM/AAAA)<input type="text" inputmode="numeric" maxlength="7" placeholder="08/2025" id="fPrevPeriod"></label><label>Meta<input type="text" inputmode="decimal" class="decimal-input" id="fPrevTarget"></label><label>Realizado<input type="text" inputmode="decimal" class="decimal-input" id="fPrevRevenue"></label><label class="red-only">Relógios<input type="text" inputmode="decimal" class="decimal-input" id="fPrevWatch"></label><label class="red-only">Solar<input type="text" inputmode="decimal" class="decimal-input" id="fPrevSolar"></label><label>Grau + Lente <small>(total)</small><input type="text" inputmode="decimal" class="decimal-input" id="fPrevDegreeLens"></label><label>Lentes <small>(somente lentes)</small><input type="text" inputmode="decimal" class="decimal-input" id="fPrevLens"></label><label class="optical-only">Luxottica (R$)<input type="text" inputmode="decimal" class="decimal-input" id="fPrevLuxottica"></label><label class="optical-only">Lentes de contato (R$)<input type="text" inputmode="decimal" class="decimal-input" id="fPrevContactLens"></label>
+        </div><div class="auto-summary" id="prevAutoSummary"></div></section>
+        <section class="period-edit-card current-edit"><div class="period-edit-title"><span class="year-dot blue-dot"></span><div><strong>Vendidos ano atual</strong><small>Período em fechamento</small></div></div><div class="form-grid compact-grid">
+          <label>Período (MM/AAAA)<input type="text" inputmode="numeric" maxlength="7" placeholder="08/2026" id="fCurrentPeriod"></label><label>Meta<input type="text" inputmode="decimal" class="decimal-input" id="fCurrentTarget"></label><label>Realizado<input type="text" inputmode="decimal" class="decimal-input" id="fCurrentRevenue"></label><label class="red-only">Relógios<input type="text" inputmode="decimal" class="decimal-input" id="fCurrentWatch"></label><label class="red-only">Solar<input type="text" inputmode="decimal" class="decimal-input" id="fCurrentSolar"></label><label>Grau + Lente <small>(total)</small><input type="text" inputmode="decimal" class="decimal-input" id="fCurrentDegreeLens"></label><label>Lentes <small>(somente lentes)</small><input type="text" inputmode="decimal" class="decimal-input" id="fCurrentLens"></label><label class="optical-only">Luxottica (R$)<input type="text" inputmode="decimal" class="decimal-input" id="fCurrentLuxottica"></label><label class="optical-only">Lentes de contato (R$)<input type="text" inputmode="decimal" class="decimal-input" id="fCurrentContactLens"></label>
+        </div><div class="auto-summary" id="currentAutoSummary"></div></section>
+      </div>
+      <details class="advanced-box"><summary>Indicadores operacionais (conversão, P.A. e ticket médio)</summary><p>Esses campos alimentam os indicadores operacionais da tela.</p><div class="ops-columns"><div><h4>Ano anterior</h4><div class="form-grid compact-grid"><label>Atendimentos<input type="number" min="0" step="1" id="fPrevAttend"></label><label>Vendas<input type="number" min="0" step="1" id="fPrevSales"></label><label>Peças<input type="number" min="0" step="1" id="fPrevPieces"></label></div></div><div><h4>Ano atual</h4><div class="form-grid compact-grid"><label>Atendimentos<input type="number" min="0" step="1" id="fCurrentAttend"></label><label>Vendas<input type="number" min="0" step="1" id="fCurrentSales"></label><label>Peças<input type="number" min="0" step="1" id="fCurrentPieces"></label></div></div></div></details>
+      <div class="calculation-banner" id="growthPreview"></div>
+      <div class="modal-actions"><button value="cancel" class="secondary-btn">Cancelar</button><button type="button" class="primary-btn" id="saveDataBtn">✓ Salvar prognóstico</button></div>
+    </form>
+  </dialog>
+
+  <!-- GERENCIAR VENDEDORES -->
+  <dialog id="sellerManagerModal" class="modal manager-modal"><form method="dialog"><div class="modal-head"><div><h3>Editar dados dos vendedores</h3><p>Edite comparadas, foto, perfil comportamental e Chilli Seguro.</p></div><button value="cancel" class="close-btn">×</button></div><div class="seller-manager-toolbar"><span id="sellerManagerCount">0 de 10 vendedores</span><button type="button" class="primary-btn" id="managerAddSellerBtn">＋ Novo vendedor</button></div><div class="seller-manager-list" id="sellerManagerList"></div><div class="modal-actions"><button value="cancel" class="secondary-btn">Fechar</button></div></form></dialog>
+
+  <!-- VENDEDOR -->
+  <dialog id="sellerModal" class="modal wide-modal"><form method="dialog" id="sellerForm" novalidate>
+    <div class="modal-head"><div><h3 id="sellerModalTitle">Cadastrar vendedor</h3><p>Comparadas, representatividade e 70/30 são calculados automaticamente.</p></div><button value="cancel" class="close-btn">×</button></div>
+    <div class="seller-profile-editor">
+      <label class="photo-uploader"><input id="sPhoto" type="file" accept="image/*"><span class="photo-preview" id="sPhotoPreview">+</span><span><strong>Foto do vendedor</strong><small>Clique para selecionar uma foto</small></span></label>
+      <div class="seller-basic-grid"><label>Nome do vendedor<input id="sName" required placeholder="Nome completo"></label><label>Função<select id="sRole"><option>Vendedora</option><option>Vendedor</option><option>Gerente</option><option>Franqueado</option></select></label><label>Perfil comportamental<select id="sProfile"><option value="">Sem selo</option><option value="gato">Gato</option><option value="tubarao">Tubarão</option><option value="aguia">Águia</option><option value="lobo">Lobo</option></select></label><label>Chilli Seguro (unidades)<input id="sChilliSeguro" type="number" min="0" step="1"></label></div>
+    </div>
+    <div class="period-edit-grid">
+      <section class="period-edit-card previous-edit"><div class="period-edit-title"><span class="year-dot yellow-dot"></span><div><strong>Vendidos ano anterior</strong><small>Dados do vendedor</small></div></div><div class="form-grid compact-grid"><label>Período (MM/AAAA)<input id="sPrevPeriod" type="text" inputmode="numeric" maxlength="7" placeholder="08/2025"></label><label>Meta<input id="sPrevTarget" type="text" inputmode="decimal" class="decimal-input"></label><label>Realizado<input id="sPrevRevenue" type="text" inputmode="decimal" class="decimal-input"></label><label class="red-only">Relógios<input id="sPrevWatch" type="text" inputmode="decimal" class="decimal-input"></label><label class="red-only">Solar<input id="sPrevSolar" type="text" inputmode="decimal" class="decimal-input"></label><label>Grau + Lente<input id="sPrevDegreeLens" type="text" inputmode="decimal" class="decimal-input"></label><label>Lentes (R$)<input id="sPrevLens" type="text" inputmode="decimal" class="decimal-input"></label><label class="optical-only">Lentes (pares) <input id="sPrevLensQty" type="number" min="0" step="1" placeholder="Qtd. de pares"></label><label class="optical-only">Luxottica (R$)<input id="sPrevLuxottica" type="text" inputmode="decimal" class="decimal-input"></label><label class="optical-only">Lentes de contato (R$)<input id="sPrevContactLens" type="text" inputmode="decimal" class="decimal-input"></label></div><div class="auto-summary" id="sellerPrevSummary"></div></section>
+      <section class="period-edit-card current-edit"><div class="period-edit-title"><span class="year-dot blue-dot"></span><div><strong>Vendidos ano atual</strong><small>Dados do vendedor</small></div></div><div class="form-grid compact-grid"><label>Período (MM/AAAA)<input id="sCurrentPeriod" type="text" inputmode="numeric" maxlength="7" placeholder="08/2026"></label><label>Meta<input id="sCurrentTarget" type="text" inputmode="decimal" class="decimal-input"></label><label>Realizado<input id="sCurrentRevenue" type="text" inputmode="decimal" class="decimal-input"></label><label class="red-only">Relógios<input id="sCurrentWatch" type="text" inputmode="decimal" class="decimal-input"></label><label class="red-only">Solar<input id="sCurrentSolar" type="text" inputmode="decimal" class="decimal-input"></label><label>Grau + Lente<input id="sCurrentDegreeLens" type="text" inputmode="decimal" class="decimal-input"></label><label>Lentes (R$)<input id="sCurrentLens" type="text" inputmode="decimal" class="decimal-input"></label><label class="optical-only">Lentes (pares) <input id="sCurrentLensQty" type="number" min="0" step="1" placeholder="Qtd. de pares"></label><label class="optical-only">Luxottica (R$)<input id="sCurrentLuxottica" type="text" inputmode="decimal" class="decimal-input"></label><label class="optical-only">Lentes de contato (R$)<input id="sCurrentContactLens" type="text" inputmode="decimal" class="decimal-input"></label></div><div class="auto-summary" id="sellerCurrentSummary"></div></section>
+    </div>
+    <details class="advanced-box"><summary>Indicadores operacionais do vendedor</summary><div class="form-grid seller-ops-grid"><label>Atendimentos atuais<input id="sAttend" type="number" min="0" step="1"></label><label>Vendas atuais<input id="sSales" type="number" min="0" step="1"></label><label>Peças atuais<input id="sPieces" type="number" min="0" step="1"></label><label>Usab. CRM 360 (%)<input id="sCrm" type="text" inputmode="decimal" class="decimal-input percent-input"></label><div class="readonly-kpi"><span>70/30 automático</span><strong id="s7030Auto">0%</strong><small>Realizado do vendedor ÷ realizado da loja</small></div></div></details>
+    <input type="hidden" id="sEditIndex" value="-1"><div class="calculation-banner" id="sellerGrowthPreview"></div><div class="modal-actions"><button value="cancel" class="secondary-btn">Cancelar</button><button type="button" class="primary-btn" id="saveSellerBtn">Salvar vendedor</button></div>
+  </form></dialog>
+
+  <!-- CATEGORIAS -->
+  <dialog id="categoryModal" class="modal wide-modal"><form method="dialog" id="categoryForm" novalidate><div class="modal-head"><div><h3>Editar fechamento por categoria</h3><p>Informe quantidade de peças e valor realizado. O sistema calcula representatividade e variações.</p></div><button value="cancel" class="close-btn">×</button></div><div class="category-editor-periods"><section class="category-editor-block previous-edit"><div class="period-edit-title"><span class="year-dot yellow-dot"></span><div><strong id="catPrevTitle">Ano anterior</strong><small>Peças e valor realizado</small></div></div><div class="category-editor-table" id="catPrevFields"></div><div class="category-editor-total" id="catPrevTotal"></div></section><section class="category-editor-block current-edit"><div class="period-edit-title"><span class="year-dot blue-dot"></span><div><strong id="catCurrentTitle">Ano atual</strong><small>Peças e valor realizado</small></div></div><div class="category-editor-table" id="catCurrentFields"></div><div class="category-editor-total" id="catCurrentTotal"></div></section></div><div class="calculation-banner"><strong>Regra:</strong> REP. da categoria = valor da categoria ÷ realizado da loja. Conversão GxL = peças de Lente ÷ peças de Grau.</div><div class="modal-actions"><button value="cancel" class="secondary-btn">Cancelar</button><button type="button" class="primary-btn" id="saveCategoriesBtn">Salvar categorias</button></div></form></dialog>
+
+  <!-- SHARE DE LENTE -->
+  <dialog id="shareLensModal" class="modal wide-modal"><form method="dialog" id="shareLensForm" novalidate>
+    <div class="modal-head"><div><h3>Editar Share de Lente</h3><p>Informe faturamento e quantidade por tipo. Percentuais e preços médios são calculados automaticamente.</p></div><button value="cancel" class="close-btn">×</button></div>
+    <div class="share-editor-grid">
+      <section class="share-editor-block">
+        <span class="eyebrow">TIPO DE LENTE</span>
+        <h4>Share de lente</h4>
+        <div class="share-editor-rows">
+          <div class="share-editor-row"><strong>Multifocal</strong><label>Faturamento (R$)<input id="shareMultifocalRevenue" class="decimal-input" type="text" inputmode="decimal"></label><label>Qtd<input id="shareMultifocalQty" type="number" min="0" step="1"></label><span class="share-auto" id="shareMultifocalAuto">—</span></div>
+          <div class="share-editor-row"><strong>Visão simples</strong><label>Faturamento (R$)<input id="shareSingleRevenue" class="decimal-input" type="text" inputmode="decimal"></label><label>Qtd<input id="shareSingleQty" type="number" min="0" step="1"></label><span class="share-auto" id="shareSingleAuto">—</span></div>
+        </div>
+        <div class="calculation-banner" id="shareTypePreview"></div>
+      </section>
+      <section class="share-editor-block">
+        <span class="eyebrow">LABORATÓRIOS</span>
+        <h4>Quantidade por laboratório</h4>
+        <div class="lab-editor-grid"></div><button type="button" class="outline-add" id="addLabBtn">＋ Adicionar laboratório</button>
+        <div class="calculation-banner" id="shareLabPreview"></div>
+      </section>
+    </div>
+    <div class="modal-actions"><button value="cancel" class="secondary-btn">Cancelar</button><button type="button" class="primary-btn" id="saveShareLensBtn">Salvar Share de Lente</button></div>
+  </form></dialog>
+
+  <!-- COLUNAS -->
+  <dialog id="columnsModal" class="modal small-modal"><form method="dialog"><div class="modal-head"><div><h3>Configurar colunas</h3><p>Selecione os indicadores da sua loja. Os indicadores da Ótica aparecem ao escolher esse tipo em Configurações.</p></div><button value="cancel" class="close-btn">×</button></div><div class="checks" id="columnChecks"></div><div class="modal-actions"><button value="cancel" class="secondary-btn">Fechar</button><button type="button" class="primary-btn" id="saveColumnsBtn">Aplicar</button></div></form></dialog>
+
+  <!-- RAIO X OPERAÇÃO -->
+  <dialog id="operationModal" class="modal wide-modal"><form method="dialog"><div class="modal-head"><div><h3>Editar Raio X da operação</h3><p>Registre desafios, acertos e nível de execução do mês.</p></div><button value="cancel" class="close-btn">×</button></div><div class="form-grid rx-edit-grid"><label>Oportunidade de crescimento<select id="opOpportunity"><option>Baixa</option><option>Média</option><option>Alta</option><option>Muito alta</option></select></label><label>Nível de execução (%)<input id="opExecution" type="number" min="0" max="100" step="1"></label><label class="span-2">Desafios da operação <small>Um por linha</small><textarea id="opChallenges" rows="6"></textarea></label><label class="span-2">Acertos do mês <small>Um por linha</small><textarea id="opWins" rows="6"></textarea></label><label class="span-2">Observações do gestor<textarea id="opNotes" rows="5"></textarea></label></div><div class="modal-actions"><button value="cancel" class="secondary-btn">Cancelar</button><button type="button" class="primary-btn" id="saveOperationBtn">Salvar análise</button></div></form></dialog>
+
+  <!-- CRM360 E OTO -->
+  <dialog id="commercialRxModal" class="modal wide-modal"><form method="dialog" id="commercialRxForm" novalidate>
+    <div class="modal-head"><div><h3>Editar CRM360 e Oto</h3><p>Atualize os indicadores comerciais que alimentam o Raio X da operação.</p></div><button value="cancel" class="close-btn">×</button></div>
+    <div class="commercial-editor-grid">
+      <section class="commercial-editor-block crm-editor-block">
+        <span class="eyebrow">CRM360</span><h4>Bônus</h4>
+        <div class="form-grid compact-grid">
+          <label>Venda base (R$)<input id="crmSalesBase" class="decimal-input" type="text" inputmode="decimal"></label>
+          <label>Taxa de retorno (%)<input id="crmReturnRate" class="decimal-input" type="text" inputmode="decimal"></label>
+          <label>Bônus gerado (R$)<input id="crmGeneratedAmount" class="decimal-input" type="text" inputmode="decimal"></label>
+          <label>Tickets gerados<input id="crmGeneratedTickets" type="number" min="0" step="1"></label>
+          <label>Bônus resgatado (R$)<input id="crmRedeemedAmount" class="decimal-input" type="text" inputmode="decimal"></label>
+          <label>Tickets resgatados<input id="crmRedeemedTickets" type="number" min="0" step="1"></label>
+          <label>Bônus perdido (R$)<input id="crmLostAmount" class="decimal-input" type="text" inputmode="decimal"></label>
+          <label>Tickets perdidos<input id="crmLostTickets" type="number" min="0" step="1"></label>
+          <label>Bônus a vencer (R$)<input id="crmExpiringAmount" class="decimal-input" type="text" inputmode="decimal"></label>
+          <label>Tickets a vencer<input id="crmExpiringTickets" type="number" min="0" step="1"></label>
+        </div>
+      </section>
+      <section class="commercial-editor-block oto-editor-block">
+        <div class="oto-editor-brand"><img src="assets/oto-logo.png" alt="Oto"><div><span class="eyebrow">RAIO X OTO</span><h4>Indicadores</h4></div></div>
+        <div class="form-grid compact-grid">
+          <label>Receita atribuída (R$)<input id="otoRevenue" class="decimal-input" type="text" inputmode="decimal"></label>
+          <label>Vendas atribuídas<input id="otoSales" type="number" min="0" step="1"></label>
+          <label>Contatos realizados<input id="otoContacts" type="number" min="0" step="1"></label>
+          <label>Taxa de conversão (%)<input id="otoConversion" class="decimal-input" type="text" inputmode="decimal"></label>
+          <label>Janela de conversão (dias)<input id="otoWindowDays" class="decimal-input" type="text" inputmode="decimal"></label>
+        </div>
+        <div class="calculation-banner" id="otoAutoPreview"></div>
+      </section>
+    </div>
+    <div class="modal-actions"><button value="cancel" class="secondary-btn">Cancelar</button><button type="button" class="primary-btn" id="saveCommercialRxBtn">Salvar CRM360 e Oto</button></div>
+  </form></dialog>
+
+  <!-- RAIO X DO TIME -->
+  <dialog id="teamRxModal" class="modal wide-modal"><form method="dialog"><div class="modal-head"><div><h3>Editar Raio X do time</h3><p>Registre evolução, treinamentos e próximos passos da equipe.</p></div><button value="cancel" class="close-btn">×</button></div><div class="form-grid rx-edit-grid"><label>Engajamento (%)<input id="teamEngagement" type="number" min="0" max="100" step="1"></label><label>Execução (%)<input id="teamExecution" type="number" min="0" max="100" step="1"></label><label class="span-2">Pontos fortes <small>Um por linha</small><textarea id="teamStrengthsInput" rows="5"></textarea></label><label class="span-2">Pontos de atenção <small>Um por linha</small><textarea id="teamAttentionInput" rows="5"></textarea></label><label class="span-2">Observações do gestor<textarea id="teamNotesInput" rows="5"></textarea></label></div><h4 class="modal-subtitle">Treinamentos e ações</h4><div id="trainingEditorRows" class="action-editor-list"></div><button type="button" class="outline-add" id="addTrainingRowBtn">＋ Adicionar treinamento</button><h4 class="modal-subtitle">Evolução individual</h4><div id="individualEditorRows" class="individual-editor-list"></div><div class="modal-actions"><button value="cancel" class="secondary-btn">Cancelar</button><button type="button" class="primary-btn" id="saveTeamRxBtn">Salvar análise</button></div></form></dialog>
+
+
+  <!-- CONFIGURAÇÕES -->
+  <dialog id="settingsModal" class="modal small-modal"><form method="dialog" id="settingsForm">
+    <div class="modal-head"><div><h3>Configurações</h3><p>Tipo da loja e backup dos seus dados. As alterações da loja são exclusivas do Master.</p></div><button value="cancel" class="close-btn">×</button></div>
+    <div class="settings-card">
+      <div class="settings-icon">⚙</div>
+      <div><strong>Identificação da loja</strong><p>O nome salvo aparece no cabeçalho e na barra lateral.</p></div>
+    </div>
+    <div class="form-grid settings-grid">
+      <label class="span-2">Nome da loja<input id="settingsStoreName" type="text" maxlength="60" autocomplete="organization" placeholder="Ex.: Capim Dourado"></label>
+      <label class="span-2">Tipo da loja<select id="settingsStoreType"><option value="vermelha">Loja Vermelha — Chilli Beans</option><option value="optica">Ótica Chilli Beans</option></select><small>Altera o tema, o logotipo e as categorias exibidas. Os valores já cadastrados continuam salvos.</small></label>
+    </div>
+    <div class="visual-theme-setting" id="visualThemeSetting" aria-label="Escolher tema do Prognóstico">
+      <div class="visual-theme-heading"><span>IDENTIDADE VISUAL</span><strong>Temas do Prognóstico</strong><small>Disponíveis para Loja Vermelha e Ótica. O estilo muda em toda a interface, sem alterar seus indicadores ou lançamentos.</small></div>
+      <div class="visual-theme-options" role="radiogroup" aria-label="Escolher tema">
+        <label class="visual-theme-option" for="visualThemeOriginal" >
+          <input type="radio" id="visualThemeOriginal" name="visualTheme" value="original">
+          <span class="theme-swatch classic-swatch" aria-hidden="true"><i></i><i></i><i></i></span>
+          <strong>Original da loja</strong><small>Identidade original preservada</small>
+        </label>
+        <label class="visual-theme-option" for="visualThemeNeon" data-only="vermelha">
+          <input type="radio" id="visualThemeNeon" name="visualTheme" value="neon">
+          <span class="theme-swatch neon-swatch" aria-hidden="true"><i></i><i></i><i></i></span>
+          <strong>Chilli Neon</strong><small>Preto, vermelho e pimenta</small>
+        </label>
+        <label class="visual-theme-option" for="visualThemePink" >
+          <input type="radio" id="visualThemePink" name="visualTheme" value="pink-lemon">
+          <span class="theme-swatch pink-lemon-swatch" aria-hidden="true"><i></i><i></i><i></i></span>
+          <strong>Pink Lemon</strong><small>Rosa pop + limão vibrante</small>
+        </label>
+        <label class="visual-theme-option" for="visualThemeDark" >
+          <input type="radio" id="visualThemeDark" name="visualTheme" value="dark-chilli">
+          <span class="theme-swatch dark-chilli-swatch" aria-hidden="true"><i></i><i></i><i></i></span>
+          <strong>Dark Chilli</strong><small>Grafite + vinho intenso</small>
+        </label>
+        <label class="visual-theme-option" for="visualThemeTokyo" >
+          <input type="radio" id="visualThemeTokyo" name="visualTheme" value="neon-tokyo">
+          <span class="theme-swatch neon-tokyo-swatch" aria-hidden="true"><i></i><i></i><i></i></span>
+          <strong>Neon Tokyo</strong><small>Roxo elétrico + ciano</small>
+        </label>
+        <label class="visual-theme-option" for="visualThemeVintage" >
+          <input type="radio" id="visualThemeVintage" name="visualTheme" value="vintage-sun">
+          <span class="theme-swatch vintage-sun-swatch" aria-hidden="true"><i></i><i></i><i></i></span>
+          <strong>Vintage Sun</strong><small>Areia, creme + âmbar retrô</small>
+        </label>
+        <label class="visual-theme-option" for="visualThemeSunrise" >
+          <input type="radio" id="visualThemeSunrise" name="visualTheme" value="sun-rise">
+          <span class="theme-swatch sun-rise-swatch" aria-hidden="true"><i></i><i></i><i></i></span>
+          <strong>Sun Rise</strong><small>Coral + dourado amanhecer</small>
+        </label>
+        <label class="visual-theme-option" for="visualThemeOcean" >
+          <input type="radio" id="visualThemeOcean" name="visualTheme" value="blue-ocean">
+          <span class="theme-swatch blue-ocean-swatch" aria-hidden="true"><i></i><i></i><i></i></span>
+          <strong>Blue Ocean</strong><small>Azul oceano + turquesa</small>
+        </label>
+      </div>
+      <div class="visual-theme-help" role="status" id="visualThemeHint">Selecione um tema para visualizar e clique em Salvar configurações.</div>
+    </div>
+    <div class="store-type-choice" id="storeTypePreview"><img id="settingsTypeLogo" src="assets/logo-vermelha.png" alt="Tipo de loja"><div><strong id="settingsTypeLabel">Loja Vermelha</strong><small id="settingsTypeDescription">Relógios, Solar e Grau + Lentes</small></div></div>
+    <div class="settings-preview"><span>Prévia</span><strong id="settingsStorePreview">Capim Dourado</strong></div>
+    <div class="pwa-settings-row offline-backup-box">
+      <div><strong>Backup dos testes (JSON)</strong><p>Exporte um backup JSON da loja atual para manter uma cópia adicional dos registros.</p></div>
+      <div class="offline-backup-actions"><button type="button" class="secondary-btn" id="exportOfflineBackupBtn">⇩ Exportar backup</button><button type="button" class="secondary-btn" id="importOfflineBackupBtn">⇧ Importar backup</button></div>
+      <input type="file" id="offlineBackupFile" accept=".json,application/json" hidden>
+    </div>
+    <div class="offline-warning"><strong>Modo online:</strong> seus dados e prognósticos são gravados no servidor da loja selecionada. Exporte backups JSON regularmente como segurança adicional.</div>
+    <div class="modal-actions"><button value="cancel" class="secondary-btn">Cancelar</button><button type="button" class="primary-btn" id="saveSettingsBtn">Salvar configurações</button></div>
+  </form></dialog>
+
+
+  <!-- EXPORTAÇÃO PDF -->
+  <dialog id="pdfExportModal" class="modal small-modal pdf-export-modal"><form method="dialog">
+    <div class="modal-head"><div><h3>Baixar prognóstico em PDF</h3><p>Escolha o formato. O PDF Espelho reproduz as telas completas do sistema em sequência, como uma coleção de prints, preservando os dados e gráficos de cada aba.</p></div><button value="cancel" class="close-btn">×</button></div>
+    <div class="pdf-choice-grid">
+      <button type="button" class="pdf-choice-card report" id="pdfReportBtn">
+        <span class="pdf-choice-icon">▤</span><span><strong>PDF Relatório</strong><small>Versão compacta e organizada para leitura e impressão.</small></span>
+      </button>
+      <button type="button" class="pdf-choice-card mirror" id="pdfMirrorBtn">
+        <span class="pdf-choice-icon">▣</span><span><strong>PDF Espelho das telas</strong><small>Visão Geral, Equipe, Categorias, Share de Lente, Fechamento, Ranking e os dois Raio X, uma tela por página.</small></span>
+      </button>
+    </div>
+    <div class="pdf-export-note"><strong>PDF Espelho:</strong> o navegador abrirá a janela de impressão já com todas as telas e seus conteúdos em sequência. Em <em>Destino</em>, escolha <strong>Salvar como PDF</strong>. O nome sugerido usa o nome do arquivo salvo no Banco de Dados.</div>
+    <div class="modal-actions"><button value="cancel" class="secondary-btn">Cancelar</button></div>
+  </form></dialog>
+
+  
+<dialog id="markupModal" class="modal wide-modal"><form method="dialog"><div class="modal-head"><h3>Lançamento de lente / markup</h3><button value="cancel" class="close-btn">×</button></div><input type="hidden" id="markupIndex"><div class="form-grid"><label>Data da venda<input type="date" id="mk_date"></label><label>Laboratório<select id="mk_lab"></select></label><label>Tecnologia<select id="mk_type"><option>Visão simples</option><option>Multifocal</option></select></label><label>Quantidade de pares<input type="number" min="0" step="1" id="mk_qty"></label><label>Valor vendido (R$)<input type="number" min="0" step="0.01" id="mk_sale"></label><label>Custo das lentes (R$)<input type="number" min="0" step="0.01" id="mk_cost"></label><label>Custo da montagem (R$)<input type="number" min="0" step="0.01" id="mk_assembly"></label></div><div class="calculation-banner" id="markupPreview"></div><div class="modal-actions"><button value="cancel" class="secondary-btn">Cancelar</button><button type="button" class="primary-btn" id="saveMarkupBtn">Salvar lançamento</button></div></form></dialog>
+<dialog id="nextPlanModal" class="modal plan-action-modal"><form method="dialog"><div class="modal-head"><div><h3>Editar ação do próximo mês</h3><p>Selecione a categoria e descreva a ação.</p></div><button value="cancel" class="close-btn">×</button></div><input type="hidden" id="npIndex"><div class="form-grid"><label>Categoria<select id="np_group"><option>EQUIPE</option><option>VISUAL</option><option>ESTOQUE</option><option>RESULTADO</option><option>CORRIDAS</option></select></label><label class="span-2">Ação<textarea id="np_action" rows="3" maxlength="1500" placeholder="Descreva a ação que será realizada..."></textarea></label></div><div class="modal-actions"><button value="cancel" class="secondary-btn">Cancelar</button><button type="button" class="primary-btn" id="saveNextPlanBtn">Salvar ação</button></div></form></dialog>
+<div id="fontControl"><button id="fontToggle" title="Ajustar tamanho da fonte" aria-label="Tamanho da fonte">Aa</button><div id="fontPanel"><label for="fontScale">Tamanho da fonte</label><input id="fontScale" type="range" min="0.85" max="1.3" step="0.05" value="1"><small>Ajuste para todas as páginas</small></div></div>
+<div class="mirror-print-root" id="mirrorPrintRoot" aria-hidden="true"></div>
+
+  <div class="toast" id="toast"></div>
+  <script src="app.js?v=online-19-3"></script>
+  <script src="saas.js?v=online-19-3"></script>
+</body>
+</html>

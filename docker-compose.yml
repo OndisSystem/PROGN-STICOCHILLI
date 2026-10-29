@@ -1,0 +1,16 @@
+services:
+  prognostico:
+    build: .
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      NODE_ENV: production
+      SECURE_COOKIES: "1"
+      DB_PATH: /data/prognostico.sqlite
+    ports:
+      - "127.0.0.1:3000:3000"
+    volumes:
+      - prognostico_data:/data
+volumes:
+  prognostico_data:

@@ -1,0 +1,80 @@
+PROGNÓSTICO MENSAL V19.3 — PUBLICAÇÃO NO RAILWAY
+================================================
+
+Este pacote é a aplicação Node.js completa. O banco SQLite PRECISA de um volume
+persistente. Nunca use hospedagem estática (GitHub Pages, Netlify estático etc).
+
+ETAPA 1 — GITHUB
+1. Acesse https://github.com/new e crie um repositório PRIVADO.
+   Nome sugerido: prognostico-chilli-beans
+2. Extraia este ZIP e, no repositório criado, clique em "uploading an existing file"
+   ou "Add file" > "Upload files".
+3. Envie os ARQUIVOS E PASTAS EXTRAÍDOS para a RAIZ do repositório.
+   Confirme que Dockerfile, package.json, server.js e public/ estão na raiz.
+4. NÃO ENVIE nenhum arquivo .env com a senha nem o banco .sqlite.
+5. Salve com "Commit changes".
+
+ETAPA 2 — RAILWAY
+1. Acesse https://railway.com/ e crie sua conta.
+2. "New Project" > "Deploy from GitHub repo".
+3. Conecte GitHub e escolha o repositório privado da etapa 1.
+4. Confirme que a implantação usa o Dockerfile (detectado automaticamente).
+5. Nas configurações do serviço, adicione um VOLUME PERSISTENTE com mount path:
+
+   /data
+
+   ESSENCIAL: não avance com dados reais sem esse volume.
+
+ETAPA 3 — VARIÁVEIS DO SERVIÇO
+Abra a aba Variables do serviço no Railway e defina:
+
+MASTER_USERNAME=SuperChilli2026
+MASTER_PASSWORD=<CRIE_UMA_SENHA_FORTE_NOVA_DE_16_OU_MAIS_CARACTERES>
+DB_PATH=/data/prognostico.sqlite
+HOST=0.0.0.0
+NODE_ENV=production
+SECURE_COOKIES=1
+SEED_AUGUST_EXAMPLE=1
+RAILWAY_RUN_UID=0
+RAILWAY_DEPLOYMENT_OVERLAP_SECONDS=0
+
+Não copie os sinais < > ou o texto entre eles; substitua por uma senha privada.
+Use uma senha diferente da mencionada anteriormente no chat.
+Não é necessário definir PORT manualmente: Railway fornece PORT.
+RAILWAY_RUN_UID=0 contorna a propriedade root dos volumes Railway neste Dockerfile.
+Essa configuração executa o serviço com UID 0: para um deploy futuro mais robusto,
+recomendamos entrypoint que ajuste permissões e volte a um usuário sem privilégios.
+
+IMPORTANTE: A senha inicial no ambiente é usada SOMENTE quando o Master é criado.
+Se o banco já existir, alterar MASTER_PASSWORD não redefine o login; use a opção
+"Alterar senha" dentro do sistema.
+
+ETAPA 4 — LANÇAR O SITE
+1. Abra Deployments e faça deploy/redeploy após configurar o volume e variáveis.
+2. Verifique os logs. Deve aparecer "Prognóstico SaaS ativo na porta ...".
+3. Abra Settings > Networking > Public Networking > Generate Domain.
+4. Clique no endereço HTTPS que Railway fornecer (.up.railway.app).
+5. Verifique <URL_DO_SEU_SITE>/api/health — deve retornar {"ok":true,...}.
+
+ETAPA 5 — TESTE E SEGURANÇA
+1. Entre com o usuário Master e a nova senha privada.
+2. Confirme "Capim Dourado" e Agosto/2026 (se banco novo, SEED=1).
+3. Crie uma loja e um gerente vinculado a ela; valide que ele não vê outras lojas.
+4. Crie supervisor e franqueado; valide a visão de todas as lojas.
+5. Teste salvar, fechar e reabrir os prognósticos.
+6. Crie backups periódicos do VOLUME com o sistema parado ou usando um backup
+   SQLite consistente (não copiar o arquivo .sqlite sozinho durante gravações WAL).
+7. Ative os backups automáticos do volume, se disponíveis na sua conta Railway.
+
+ATENÇÃO
+* Volumes e serviços podem gerar custos. Consulte preços antes de ativar.
+* Mantenha somente UMA instância: SQLite com este volume não deve ter réplicas.
+* Não importe a base de agosto em uma loja diferente por engano.
+* O exemplo é demonstrativo, recuperado dos dados padrão da V18.8.
+* O projeto está pronto para DEPLOY; este pacote não cria conta nem publica sozinho.
+
+GUIAS OFICIAIS
+https://docs.railway.com/quick-start
+https://docs.railway.com/volumes
+https://docs.railway.com/networking/domains/working-with-domains
+
