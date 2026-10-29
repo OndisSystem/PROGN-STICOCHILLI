@@ -137,3 +137,7 @@ Para vários servidores simultâneos ou alta concorrência, planeje PostgreSQL.
   tests/                              Testes automatizados de API e exemplo.
 
 IMPORTANTE: dados de agosto recuperados são EXEMPLO, não comprovação contábil.
+
+
+AVISO — VERSÃO SEM LOGIN
+A autenticação foi removida a pedido. Qualquer pessoa que consiga acessar o endereço do sistema poderá consultar, criar, alterar e excluir dados. Use somente em ambiente privado/confiável. Não publique na internet com dados reais sem recolocar autenticação.

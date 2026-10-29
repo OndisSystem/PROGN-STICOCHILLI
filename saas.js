@@ -19,7 +19,7 @@
     try{response=await fetch(url,{method,headers,credentials:'same-origin',cache:'no-store',body:body===null?undefined:JSON.stringify(body)})}
     catch{throw new Error('Sem conexão com o servidor. Verifique a internet e tente novamente.');}
     let result={};try{result=await response.json()}catch{}
-    if(!response.ok){if(response.status===401&&bridge.user){bridge.user=null;bridge.suspend=true;showLogin('Sua sessão expirou. Entre novamente.')}throw new Error(result.error||'Erro ao comunicar com o servidor')}
+    if(!response.ok){throw new Error(result.error||'Erro ao comunicar com o servidor')}
     return result;
   }
   function hideApp(){document.body.classList.add('saas-auth-pending');toolbar.hidden=true}
@@ -33,14 +33,10 @@
     }catch(e){$('saasLoginError')&&($('saasLoginError').textContent=e.message)}finally{if(button.isConnected){button.disabled=false;button.textContent='Entrar no sistema'}}};
   }
   function renderToolbar(){
-    const u=bridge.user;if(!u)return;
-    toolbar.innerHTML=`<strong>${escape(u.name)} · ${roleName[u.role]||escape(u.role)}</strong><label for="saasStoreSelect">Loja:</label><select id="saasStoreSelect" aria-label="Selecionar loja">${bridge.stores.map(st=>`<option value="${escape(st.id)}" ${st.id===bridge.store?.id?'selected':''}>${escape(st.name)} · ${st.type==='optica'?'Ótica':'Vermelha'}</option>`).join('')}</select>${bridge.exampleData?'<span class="saas-example-badge" title="Valores de demonstração, recuperados da V18.8">EXEMPLO AGO/2026</span>':''}<span class="saas-save-status" id="saasSaveStatus">Conectado</span>${u.role==='master'?'<button type="button" id="saasManagerBtn">⚙ Lojas e usuários</button>':''}<button type="button" id="saasPasswordBtn">Alterar senha</button><button type="button" id="saasLogoutBtn">Sair</button>`;
-    $('saasStoreSelect').disabled=u.role==='gerente'||bridge.stores.length<=1;
+    toolbar.innerHTML=`<strong>Acesso público</strong><label for="saasStoreSelect">Loja:</label><select id="saasStoreSelect" aria-label="Selecionar loja">${bridge.stores.map(st=>`<option value="${escape(st.id)}" ${st.id===bridge.store?.id?'selected':''}>${escape(st.name)} · ${st.type==='optica'?'Ótica':'Vermelha'}</option>`).join('')}</select>${bridge.exampleData?'<span class="saas-example-badge">EXEMPLO AGO/2026</span>':''}<span class="saas-save-status" id="saasSaveStatus">Conectado</span><button type="button" id="saasManagerBtn">⚙ Lojas</button>`;
+    $('saasStoreSelect').disabled=bridge.stores.length<=1;
     $('saasStoreSelect').onchange=async e=>{try{const target=bridge.stores.find(x=>x.id===e.target.value);await selectStore(e.target.value,target?.latestPeriod||todayMonth())}catch(err){alert(err.message);e.target.value=bridge.store?.id||''}};
-    if(u.role==='master')$('saasManagerBtn').onclick=openManager;
-    $('saasLogoutBtn').onclick=logout;
-    $('saasPasswordBtn').onclick=changePassword;
-
+    $('saasManagerBtn').onclick=openManager;
   }
   async function loadStores(){const data=await api('/api/stores');bridge.stores=data.stores||[];return bridge.stores}
   async function afterLogin(){
@@ -51,8 +47,8 @@
     await selectStore(first.id,first.latestPeriod||todayMonth(),true);
   }
   function showEmptyStores(){
-    hideApp();root.innerHTML=`<div class="saas-login-wrap"><div class="saas-login"><h2>Nenhuma loja cadastrada</h2><p>${bridge.user?.role==='master'?'Use a administração para cadastrar a primeira unidade antes de iniciar o prognóstico.':'Sua conta ainda não possui uma loja disponível. Fale com o administrador Master.'}</p><button type="button" id="saasEmptyAction">${bridge.user?.role==='master'?'Criar primeira loja':'Sair'}</button></div></div>`;
-    $('saasEmptyAction').onclick=()=>bridge.user?.role==='master'?openManager():logout();
+    hideApp();root.innerHTML=`<div class="saas-login-wrap"><div class="saas-login"><h2>Nenhuma loja cadastrada</h2><p>${'Cadastre a primeira loja para começar a usar o prognóstico.'}</p><button type="button" id="saasEmptyAction">${'Criar primeira loja'}</button></div></div>`;
+    $('saasEmptyAction').onclick=()=>openManager();
   }
   bridge.queueSnapshot=snapshot=>{
     if(bridge.suspend||!bridge.user||!bridge.store)return;
@@ -73,7 +69,7 @@
     return bridge.inflight;
   };
   async function selectStore(id,period=todayMonth(),startup=false){
-    if(!bridge.user)throw new Error('Faça login primeiro');
+    if(!bridge.user)bridge.user={id:'public-user',name:'Acesso público',role:'master',storeId:null,csrf:'public-mode'};
     const target=bridge.stores.find(x=>x.id===id);
     if(!target)throw new Error('Loja indisponível para sua conta');
     if(!startup)await bridge.flush();
@@ -130,20 +126,7 @@
     bridge.queueSnapshot(window.__getForecastState());await bridge.flush();
     window.renderDatabase?.();
   };
-  async function changePassword(){
-    if(!bridge.user)return;
-    document.getElementById('saasPasswordShade')?.remove();
-    document.body.insertAdjacentHTML('beforeend',`<div class="saas-manager-shade" id="saasPasswordShade"><form class="saas-manager" style="max-width:440px" id="saasPasswordForm"><div class="saas-manager-header"><h2>Alterar minha senha</h2><button type="button" class="saas-close" id="saasPasswordClose">×</button></div><div class="saas-form-grid"><label class="full">Senha atual<input id="saasOldPassword" type="password" required autocomplete="current-password"></label><label class="full">Nova senha (12 caracteres ou mais)<input id="saasNewPassword" type="password" minlength="12" required autocomplete="new-password"></label><label class="full">Repetir nova senha<input id="saasNewPasswordConfirm" type="password" minlength="12" required autocomplete="new-password"></label><button type="submit">Atualizar senha</button></div><p class="manager-feedback" role="alert" id="saasPasswordError"></p></form></div>`);
-    $('saasPasswordClose').onclick=()=>$('saasPasswordShade').remove();
-    $('saasPasswordForm').onsubmit=async(e)=>{e.preventDefault();const a=$('saasNewPassword').value,b=$('saasNewPasswordConfirm').value;if(a!==b){$('saasPasswordError').textContent='As novas senhas não coincidem.';return}
-      try{await api('/api/me/password','PATCH',{currentPassword:$('saasOldPassword').value,newPassword:a});$('saasPasswordShade').remove();alert('Senha atualizada.')}catch(err){$('saasPasswordError').textContent=err.message}
-    };
-  }
-  async function logout(){
-    try{await bridge.flush();await api('/api/logout','POST',{})}catch{}
-    bridge.user=null;bridge.store=null;bridge.pending=null;bridge.suspend=true;
-    showLogin('Você saiu da sua conta.');
-  }
+  async function logout(){ /* Login removido no modo público. */ }
   // A configuração cadastral da loja é controlada pelo Master.
   const restrictSettings=()=>{
     if(bridge.user?.role!=='master'){
@@ -155,7 +138,7 @@
   document.getElementById('settingsBtn').addEventListener('click',restrictSettings);
   document.getElementById('openStoreSettingsBtn').addEventListener('click',restrictSettings);
   $('resetDemoBtn')?.remove();
-  // Nenhum prognóstico aparece antes da autenticação.
+  // Modo público: a aplicação inicia sem autenticação.
   let editId=null;
   function managerHtml(){
     const opts=bridge.stores.map(st=>`<option value="${escape(st.id)}">${escape(st.name)}</option>`).join('');
@@ -215,8 +198,8 @@
     });
   }
   (async()=>{
-    hideApp();
-    try{const data=await api('/api/me');bridge.user=data.user;await afterLogin()}
-    catch(e){if(!bridge.user)showLogin('')}
+    bridge.user={id:'public-user',name:'Acesso público',role:'master',storeId:null,csrf:'public-mode'};
+    try{await afterLogin()}
+    catch(e){showApp();root.innerHTML=`<div class="saas-login-wrap"><div class="saas-login"><h2>Não foi possível carregar</h2><p>${escape(e.message)}</p><button type="button" onclick="location.reload()">Tentar novamente</button></div></div>`}
   })();
 })();

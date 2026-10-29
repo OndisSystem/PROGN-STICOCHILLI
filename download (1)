@@ -1,13 +1,8 @@
-# Não enviar arquivos privados para a imagem do servidor
 .env
-.env.*
-!.env.example
-.git
-.gitignore
 node_modules/
 data/
 *.sqlite
-*.sqlite-shm
 *.sqlite-wal
+*.sqlite-shm
 *.log
 .DS_Store

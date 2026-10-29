@@ -78,3 +78,7 @@ https://docs.railway.com/quick-start
 https://docs.railway.com/volumes
 https://docs.railway.com/networking/domains/working-with-domains
 
+
+
+AVISO — VERSÃO SEM LOGIN
+A autenticação foi removida a pedido. Qualquer pessoa que consiga acessar o endereço do sistema poderá consultar, criar, alterar e excluir dados. Use somente em ambiente privado/confiável. Não publique na internet com dados reais sem recolocar autenticação.

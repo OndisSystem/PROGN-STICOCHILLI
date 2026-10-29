@@ -57,15 +57,7 @@ const validEmail=s=>typeof s==='string'&&s.length<=254&&/^[^\s@]+@[^\s@]+\.[^\s@
 const validName=s=>typeof s==='string'&&s.trim().length>=2&&s.trim().length<=80;
 const passHash=(password,salt=crypto.randomBytes(16).toString('hex'))=>`scrypt$${salt}$${crypto.scryptSync(password,salt,64).toString('hex')}`;
 function passVerify(password,hash){try{const [,salt,expected]=hash.split('$');const actual=crypto.scryptSync(password,salt,64);return crypto.timingSafeEqual(actual,Buffer.from(expected,'hex'));}catch{return false}}
-function bootstrap(){
- const username=process.env.MASTER_USERNAME,pass=process.env.MASTER_PASSWORD;
- if(!db.prepare("SELECT 1 FROM users WHERE role='master'").get()){
-   if(!username||!pass||pass.length<10){console.error('ERRO: configure MASTER_USERNAME e MASTER_PASSWORD (mínimo 10 caracteres) no ambiente antes de iniciar o sistema.');process.exit(1)}
-   db.prepare('INSERT INTO users (id,name,username,email,password_hash,role,store_id,active,created_at,updated_at) VALUES (?,?,?,?,?,?,?,?,?,?)')
-     .run(crypto.randomUUID(),'Administrador Master',username,null,passHash(pass),'master',null,1,now(),now());
-   console.log('Conta Master inicial criada com credenciais do ambiente.');
- }
-}
+function bootstrap(){ /* Modo público sem login: não cria conta Master. */ }
 bootstrap();
 // Carrega o exemplo recuperado da V18.8 somente na primeira inicialização
 // de um banco vazio quando explicitamente habilitado em .env.
@@ -131,12 +123,11 @@ async function handler(req,res){
   db.prepare('INSERT INTO sessions (token_hash,user_id,csrf,expires_at,created_at) VALUES (?,?,?,?,?)').run(sha(token),u.id,csrf,new Date(Date.now()+12*3600*1000).toISOString(),now());
   setSessionCookie(res,token);return json(res,200,{user:{id:u.id,name:u.name,role:u.role,storeId:u.store_id,email:u.email,username:u.username,csrf}})
  }
- const s=sessionInfo(req);
- if(!s)return error(res,401,'Sessão expirada ou não autenticada');
+ // Modo público sem login. Qualquer pessoa com acesso ao endereço pode visualizar e alterar os dados.
+ const s={user_id:'public-user',name:'Acesso público',email:null,username:null,role:'master',store_id:null,active:1,csrf:'public-mode'};
  if(method!=='GET'&&method!=='HEAD'){
    const origin=req.headers.origin;
    if(origin){let reqOrigin;try{reqOrigin=new URL(origin)}catch{return error(res,403,'Origem inválida')}const requestHost=req.headers.host||'';if(reqOrigin.host!==requestHost)return error(res,403,'Origem não permitida')}
-   if(req.headers['x-csrf-token']!==s.csrf)return error(res,403,'Token de segurança inválido');
  }
  if(pathname==='/api/me'&&method==='GET')return json(res,200,{user:actorPublic(s)});
  if(pathname==='/api/me/password'&&method==='PATCH'){

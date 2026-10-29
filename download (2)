@@ -1,8 +1,1 @@
-.env
-node_modules/
-data/
-*.sqlite
-*.sqlite-wal
-*.sqlite-shm
-*.log
-.DS_Store
+Dados SQLite e logs locais ficam nesta pasta após a primeira execução.
